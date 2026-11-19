@@ -1,0 +1,5 @@
+node_modules
+apps/docs/.vitepress/cache
+apps/docs/.vitepress/dist
+packages/*/dist
+*.log
