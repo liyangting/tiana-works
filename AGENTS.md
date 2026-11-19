@@ -55,6 +55,56 @@ packages/<组件名>/
 
 文档站是统一作品集，不是微前端宿主。除非用户明确提出独立运行时部署或多团队集成需求，否则不要引入 Module Federation 或其他微前端基础设施。
 
+## 新建组件操作清单
+
+新增一个组件时，按以下顺序完成；不要只添加源码而遗漏独立调试、文档或统一站点入口。
+
+1. 新建 `packages/<组件名>/`，按“新增组件包规范”准备 `src`、`playground`、`README.md`、`package.json`、`tsconfig.json`、`vite.config.ts` 和 `index.html`。
+2. 在 `package.json` 中使用 `@lyt/<组件名>` 作为包名；将 `vue` 放入 `peerDependencies`，将该组件独有的运行时依赖放入 `dependencies`。
+3. 从 `src/index.ts` 导出组件和所有公开类型；组件不应依赖文档站、业务接口实现或业务 mock 数据。
+4. 编写 `playground/main.ts` 和一个最小交互 Demo，确保执行 `pnpm --filter @lyt/<组件名> dev` 可以单独预览组件。
+5. 在 `apps/docs/package.json` 的 `dependencies` 中添加：
+
+   ```json
+   "@lyt/<组件名>": "workspace:*"
+   ```
+
+6. 新建 `apps/docs/demos/<组件名>Demo.vue`。Demo 只能从 `@lyt/<组件名>` 导入组件和类型，不能导入其内部 `src` 路径。
+7. 新建 `apps/docs/components/<组件名-kebab-case>.md`，使用以下页面骨架：
+
+   ```md
+   # 组件名称
+
+   一句话说明问题和使用边界。
+
+   ## 在线演示
+   ## 设计与边界
+   ## 基础用法
+   ## Props
+   ## Emits
+   ## Slots
+   ## 暴露的方法
+   ## 性能、资源与可访问性
+   ## 源码与独立调试
+   ```
+
+8. 在 `apps/docs/.vitepress/component-registry.ts` 添加注册项。必须填写 `name`、`label`、`description`、`route`、`packageName`、`sourceUrl`、`category`、`complexity`、`tags` 和 `status`。不要手工重复修改侧边栏；它由注册表生成。
+9. 在包 README 中说明安装 / 使用方式、设计选择、依赖和独立调试命令。
+10. 执行完整验收：
+
+    ```bash
+    pnpm typecheck
+    pnpm --filter @lyt/<组件名> build
+    pnpm build
+    ```
+
+### 命名约定
+
+- 目录和文档路由使用 `kebab-case`，例如 `gacha-lottery`。
+- Vue 组件文件和导出名称使用 `PascalCase`，例如 `GachaLottery.vue`。
+- package 名称使用 `@lyt/kebab-case`。
+- 文档 Demo 命名为 `<PascalCase>Demo.vue`。
+
 ## 工具与验证
 
 - 统一使用 **pnpm**，不要新增 npm 或 yarn 锁文件。
