@@ -64,6 +64,44 @@
         </div>
       </section>
 
+      <section class="pf-about-section" aria-labelledby="pf-about-phases">
+        <h2 id="pf-about-phases" class="pf-about-section__title">两个阶段，一种能力</h2>
+        <p class="pf-about-section__lead">
+          AI 让写代码变快了，但没有让判断变简单。下面这两段，是这种判断力的来源。
+        </p>
+
+        <div class="pf-phase-grid">
+          <article
+            v-for="phase in aboutPhases"
+            :key="phase.label"
+            class="pf-phase"
+            :class="{ 'pf-phase--current': phase.current }"
+          >
+            <div class="pf-phase__head">
+              <h3>{{ phase.label }}</h3>
+              <span class="pf-phase__period">{{ phase.period }}</span>
+            </div>
+            <p class="pf-phase__title">{{ phase.title }}</p>
+            <p class="pf-phase__summary">{{ phase.summary }}</p>
+            <ul class="pf-phase__points">
+              <li v-for="point in phase.points" :key="point">{{ point }}</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="pf-phase__bridge">
+          <span>AI 改变的是写代码的速度，不改变判断代码好坏的标准。</span>
+        </p>
+
+        <p class="pf-about-section__caption">不变的三件事</p>
+        <ul class="pf-principle-list">
+          <li v-for="principle in aboutPrinciples" :key="principle.title">
+            <strong>{{ principle.title }}</strong>
+            <span>{{ principle.body }}</span>
+          </li>
+        </ul>
+      </section>
+
       <section class="pf-about-section" aria-labelledby="pf-about-method">
         <h2 id="pf-about-method" class="pf-about-section__title">我怎么做事</h2>
         <div class="pf-block-grid">
@@ -140,7 +178,14 @@
 </template>
 
 <script setup lang="ts">
-import { aboutBlocks, experienceTimeline, profile, stackGroups } from '../data/site-data'
+import {
+  aboutBlocks,
+  aboutPhases,
+  aboutPrinciples,
+  experienceTimeline,
+  profile,
+  stackGroups,
+} from '../data/site-data'
 </script>
 
 <style scoped lang="scss">
@@ -193,6 +238,173 @@ import { aboutBlocks, experienceTimeline, profile, stackGroups } from '../data/s
   color: var(--pf-text-dim);
   font-size: 12px;
   line-height: 1.7;
+}
+
+.pf-about-section__lead {
+  max-width: 48em;
+  margin: 0 0 clamp(20px, 2.6vw, 28px);
+  color: var(--pf-text-soft);
+  font-size: 14.5px;
+  line-height: 1.85;
+}
+
+.pf-phase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.2vw, 24px);
+}
+
+.pf-phase {
+  padding: clamp(20px, 2.4vw, 28px);
+  border: 1px solid var(--pf-line);
+  border-radius: 16px;
+  background: var(--pf-surface);
+}
+
+.pf-phase--current {
+  border-color: color-mix(in srgb, var(--pf-accent) 42%, var(--pf-line));
+  background:
+    radial-gradient(70% 60% at 100% 0%, var(--pf-accent-soft), transparent 64%),
+    var(--pf-surface);
+}
+
+.pf-phase__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pf-phase__head h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.pf-phase__period {
+  flex: none;
+  padding: 3px 10px;
+  border: 1px solid var(--pf-line);
+  border-radius: 999px;
+  color: var(--pf-text-dim);
+  font-family: var(--pf-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+}
+
+.pf-phase--current .pf-phase__period {
+  border-color: color-mix(in srgb, var(--pf-accent) 40%, var(--pf-line));
+  color: var(--pf-accent);
+}
+
+.pf-phase__title {
+  margin: 18px 0 8px;
+  font-family: var(--pf-serif);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.pf-phase__summary {
+  margin: 0;
+  color: var(--pf-text-soft);
+  font-size: 13.5px;
+  line-height: 1.85;
+}
+
+.pf-phase__points {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-phase__points li {
+  position: relative;
+  padding-left: 14px;
+  color: var(--pf-text-soft);
+  font-size: 13.5px;
+  line-height: 1.8;
+}
+
+.pf-phase__points li::before {
+  content: '';
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--pf-accent);
+  opacity: 0.5;
+}
+
+.pf-phase__bridge {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 22px);
+  margin: clamp(24px, 3vw, 34px) 0;
+  color: var(--pf-text);
+  font-family: var(--pf-serif);
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.7;
+  text-align: center;
+}
+
+.pf-phase__bridge::before,
+.pf-phase__bridge::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+}
+
+.pf-phase__bridge::before {
+  background: linear-gradient(90deg, transparent, var(--pf-line));
+}
+
+.pf-phase__bridge::after {
+  background: linear-gradient(90deg, var(--pf-line), transparent);
+}
+
+.pf-about-section__caption {
+  margin: 0 0 14px;
+  color: var(--pf-text-dim);
+  font-family: var(--pf-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pf-principle-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-principle-list li {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 20px;
+  padding: 16px 0;
+  border-top: 1px solid var(--pf-line);
+}
+
+.pf-principle-list li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.pf-principle-list strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pf-principle-list span {
+  color: var(--pf-text-soft);
+  font-size: 14px;
+  line-height: 1.85;
 }
 
 .pf-block-grid {
@@ -387,6 +599,10 @@ a.pf-contact:hover {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .pf-phase-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .pf-block-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
@@ -397,6 +613,11 @@ a.pf-contact:hover {
   .pf-timeline li {
     grid-template-columns: minmax(0, 1fr);
     gap: 8px;
+  }
+
+  .pf-principle-list li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
   }
 
   .pf-stack-grid {
