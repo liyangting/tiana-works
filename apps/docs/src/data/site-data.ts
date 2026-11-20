@@ -26,6 +26,20 @@ export interface StackGroup {
   items: string[]
 }
 
+export interface AboutPhase {
+  label: string
+  period: string
+  title: string
+  summary: string
+  points: string[]
+  current?: boolean
+}
+
+export interface AboutPrinciple {
+  title: string
+  body: string
+}
+
 export const profile = {
   name: 'Tiana',
   displayName: '李杨婷',
@@ -59,6 +73,49 @@ export const aboutBlocks: AboutBlock[] = [
   {
     title: '交付，而不是演示',
     body: '独立包、公开 API、Playground、文档和可访问性，缺一项就不算完成。组件应该能被别人接手，而不是只能由我维护。',
+  },
+]
+
+/** 关于页的能力阶段对照：手写期与 AI 协同期。 */
+export const aboutPhases: AboutPhase[] = [
+  {
+    label: '手写期',
+    period: '入行早期',
+    title: '没有补全，也没有生成',
+    summary: '组件、动画、渲染、长列表，都是从零写出来的；线上问题也只能自己一层层找。',
+    points: [
+      '实现动画和 Canvas 渲染时，靠理解绘制与刷新的机制，而不是依赖现成库',
+      '排查问题从现象倒推根因：断点、源码、性能面板逐层排除，直到锁定到具体一行',
+      '反复改造老业务，慢慢磨出边界感：什么该抽象、什么该留在原地',
+    ],
+  },
+  {
+    label: 'AI 协同期',
+    period: '近一年',
+    title: 'AI 起草，人做判断',
+    summary: '把探索、脚手架和重复劳动交给 AI，精力放在方案、边界和验收上。',
+    points: [
+      '先拆任务再生成，让 AI 在划定的范围内产出，架构不由模型决定',
+      '生成结果先读、先跑、先对照源码，不把模型输出当成结论',
+      '每次改动都走完类型、lint、构建和浏览器实测，验不过就不算完成',
+    ],
+    current: true,
+  },
+]
+
+/** AI 时代没有改变的三项能力。 */
+export const aboutPrinciples: AboutPrinciple[] = [
+  {
+    title: '定位问题',
+    body: '从报错、现象、代码三侧收敛，判断问题在框架、状态、渲染还是构建层。',
+  },
+  {
+    title: '纠错验证',
+    body: 'AI 的方案一定会有错，能识别错、缩小范围、给出最小修复才是分界线。',
+  },
+  {
+    title: '架构取舍',
+    body: '知道什么该抽象、什么该留在原地，避免生成“看起来完整”的过度设计。',
   },
 ]
 
