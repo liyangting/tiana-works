@@ -591,7 +591,7 @@ function cardCover(entry: ComponentEntry): string {
   --pf-line-strong: rgb(244 234 220 / 20%);
   --pf-accent: #f2704f;
   --pf-accent-soft: rgb(242 112 79 / 15%);
-  --pf-serif: 'Songti SC', 'Noto Serif SC', 'Source Han Serif SC', 'Iowan Old Style', Georgia, serif;
+  --pf-serif: 'Noto Serif SC', 'Songti SC', 'Source Han Serif SC', 'Iowan Old Style', Georgia, serif;
   --pf-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
 
   /* 轮播卡片宽度，JS 读取后按比例计算扇形位移。 */

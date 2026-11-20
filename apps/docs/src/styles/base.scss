@@ -1,3 +1,20 @@
+/* 思源宋体子集：只包含站点当前用到的字符，新增文案后需重新生成 */
+@font-face {
+  font-family: 'Noto Serif SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/noto-serif-sc-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Noto Serif SC';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/noto-serif-sc-semibold.woff2') format('woff2');
+}
+
 :root {
   --app-header-h: 64px;
   --app-font:
@@ -15,7 +32,7 @@
   --pf-line-strong: rgb(36 26 20 / 22%);
   --pf-accent: #cf4a2b;
   --pf-accent-soft: rgb(207 74 43 / 12%);
-  --pf-serif: 'Songti SC', 'Noto Serif SC', 'Source Han Serif SC', 'Iowan Old Style', Georgia, serif;
+  --pf-serif: 'Noto Serif SC', 'Songti SC', 'Source Han Serif SC', 'Iowan Old Style', Georgia, serif;
   --pf-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
   --el-color-primary: #cf4a2b;
 
