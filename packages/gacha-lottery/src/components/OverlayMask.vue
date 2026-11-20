@@ -1,19 +1,19 @@
-<script setup lang="ts">
-defineProps<{ active?: boolean }>();
-</script>
-
 <template>
   <div class="overlay-mask" :class="{ active }"></div>
 </template>
 
-<style scoped>
+<script setup lang="ts">
+defineProps<{ active?: boolean }>()
+</script>
+
+<style scoped lang="scss">
 .overlay-mask {
   position: fixed;
-  top: 0; 
-  left: 0; 
-  width: 100%; 
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(2px);
   z-index: 99;
   opacity: 0;

@@ -1,6 +1,6 @@
 # Component Portfolio
 
-个人 Vue 3 复杂组件资产库。每个组件是可独立开发和交付的 workspace package，统一文档站负责在线演示、设计说明和源码导航。
+个人 Vue 3 复杂组件资产库。每个组件是可独立开发和交付的 workspace package，统一作品集站点负责在线演示、项目介绍与设计说明。
 
 ## 当前组件
 
@@ -9,7 +9,7 @@
 ## 项目结构
 
 ```text
-apps/docs/                 # 唯一对外的 VitePress 展示站
+apps/docs/                 # 对外的 Vue 3 作品集站（Vite + Vue Router + Element Plus）
 packages/gacha-lottery/    # 可独立维护的扭蛋组件项目
 ```
 

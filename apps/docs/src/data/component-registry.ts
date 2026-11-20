@@ -1,5 +1,11 @@
+import gachaCover from '../assets/gacha-lottery.webp'
+import physicsBallCover from '../assets/physics-ball.png'
+import particleCanvasCover from '../assets/particle-canvas.webp'
+import uploadFlowCover from '../assets/upload-flow.webp'
+import virtualListCover from '../assets/virtual-list.webp'
+
 export interface ComponentPreview {
-  /** 相对 public 的路径，例如 /previews/gacha-lottery/01-idle.webp */
+  /** 组件截图，由 Vite 作为模块资源引入，例如 src/assets/xxx.webp */
   src: string
   alt: string
   caption?: string
@@ -18,7 +24,7 @@ export interface ComponentEntry {
   status: '已发布' | '规划中'
   /** 标记为首页 Hero 轮播的组件；全部 featured 组件参与环绕切换。 */
   featured?: boolean
-  /** 首页卡片封面图，相对 public 的路径。留空时 fallback 到 previews[0]，再兜底为 CSS 占位。 */
+  /** 首页卡片封面图，引用 src/assets 中的图片。留空时 fallback 到 previews[0]，再兜底为 CSS 占位。 */
   cover?: string
   /** 额外的静态截图（预留字段，暂不在首页使用）。 */
   previews?: ComponentPreview[]
@@ -41,9 +47,7 @@ export const componentRegistry: ComponentEntry[] = [
     tags: ['Vue 3', 'Matter.js', 'GSAP', '状态机'],
     status: '已发布',
     featured: true,
-    // 截图放在 apps/docs/public/previews/gacha-lottery/，接入后填 cover 即可：
-    // cover: '/previews/gacha-lottery/cover.webp',
-    cover: '',
+    cover: gachaCover,
     previews: [],
   },
   {
@@ -58,7 +62,7 @@ export const componentRegistry: ComponentEntry[] = [
     tags: ['Vue 3', '窗口化', 'Recycler', '动态高度'],
     status: '规划中',
     featured: true,
-    cover: '',
+    cover: virtualListCover,
     previews: [],
   },
   {
@@ -73,7 +77,7 @@ export const componentRegistry: ComponentEntry[] = [
     tags: ['Vue 3', 'Canvas 2D', '粒子系统', '力场模拟'],
     status: '规划中',
     featured: true,
-    cover: '',
+    cover: particleCanvasCover,
     previews: [],
   },
   {
@@ -88,7 +92,7 @@ export const componentRegistry: ComponentEntry[] = [
     tags: ['Vue 3', 'HTTP', '状态机', '并发控制'],
     status: '规划中',
     featured: true,
-    cover: '',
+    cover: uploadFlowCover,
     previews: [],
   },
   {
@@ -103,12 +107,7 @@ export const componentRegistry: ComponentEntry[] = [
     tags: ['Vue 3', 'Matter.js', '物理模拟', '游戏化'],
     status: '规划中',
     featured: true,
-    cover: '',
+    cover: physicsBallCover,
     previews: [],
   },
 ]
-
-export const sidebarItems = componentRegistry.map(component => ({
-  text: `${component.name} ${component.label}`,
-  link: component.route,
-}))
