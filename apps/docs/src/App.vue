@@ -20,7 +20,7 @@
         />
         <el-link
           class="app-github"
-          href="https://github.com/liyangting/vue3-pure-components"
+          href="https://github.com/liyangting/tiana-works"
           target="_blank"
           rel="noreferrer"
         >

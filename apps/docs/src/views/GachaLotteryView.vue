@@ -181,7 +181,7 @@
         <div class="pf-doc__links">
           <a
             class="pf-textlink"
-            href="https://github.com/liyangting/vue3-pure-components/tree/main/packages/gacha-lottery"
+            href="https://github.com/liyangting/tiana-works/tree/main/packages/gacha-lottery"
             target="_blank"
             rel="noreferrer"
           >

@@ -148,7 +148,7 @@ import { aboutBlocks, experienceTimeline, profile, stackGroups } from '../data/s
 
 .pf-about-page__intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.9fr);
   gap: clamp(28px, 4.6vw, 64px);
   padding: clamp(34px, 4.4vw, 56px) 0;
 }
