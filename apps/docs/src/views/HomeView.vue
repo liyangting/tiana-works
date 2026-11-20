@@ -604,8 +604,6 @@ function cardCover(entry: ComponentEntry): string {
   background: var(--pf-bg);
   color: var(--pf-text);
   font-family: var(--app-font);
-
-  padding: 0 50px;
 }
 
 html:not(.dark) .pf-home {
@@ -665,6 +663,7 @@ html:not(.dark) .pf-grain {
   width: 100%;
   max-width: 1720px;
   margin: 0 auto;
+  padding: 0 50px;
 }
 
 /* ---------- Hero ---------- */
@@ -1454,7 +1453,11 @@ html:not(.dark) .pf-carousel__mask {
     font-size: 11px;
   }
 }
-
+@media (max-width: 420px) {
+  .pf-showcase {
+    zoom: 0.95;
+  }
+}
 /* ---------- 动效降级 ---------- */
 
 @media (prefers-reduced-motion: reduce) {
