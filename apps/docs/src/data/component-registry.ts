@@ -1,8 +1,9 @@
-import gachaCover from '../assets/gacha-lottery.webp'
-import physicsBallCover from '../assets/physics-ball.png'
-import particleCanvasCover from '../assets/particle-canvas.webp'
-import uploadFlowCover from '../assets/upload-flow.webp'
-import virtualListCover from '../assets/virtual-list.webp'
+import gachaCover from '../assets/gacha-lottery-cover.svg'
+import waterfallCover from '../assets/waterfall.svg'
+import physicsBallCover from '../assets/physics-ball-cover.svg'
+import particleCanvasCover from '../assets/particle-canvas-cover.svg'
+import uploadFlowCover from '../assets/upload-flow-cover.svg'
+import virtualListCover from '../assets/virtual-list-cover.svg'
 
 export interface ComponentPreview {
   /** 组件截图，由 Vite 作为模块资源引入，例如 src/assets/xxx.webp */
@@ -24,6 +25,8 @@ export interface ComponentEntry {
   status: '已发布' | '规划中'
   /** 标记为首页 Hero 轮播的组件；全部 featured 组件参与环绕切换。 */
   featured?: boolean
+  /** 轮播卡片主色，用于底部信息区、强调线与激活描边。 */
+  accent?: string
   /** 首页卡片封面图，引用 src/assets 中的图片。留空时 fallback 到 previews[0]，再兜底为 CSS 占位。 */
   cover?: string
   /** 额外的静态截图（预留字段，暂不在首页使用）。 */
@@ -47,7 +50,24 @@ export const componentRegistry: ComponentEntry[] = [
     tags: ['Vue 3', 'Matter.js', 'GSAP', '状态机'],
     status: '已发布',
     featured: true,
+    accent: '#2f8074',
     cover: gachaCover,
+    previews: [],
+  },
+  {
+    name: 'Waterfall',
+    label: '瀑布流',
+    description: '最短列优先的纯净瀑布流布局，含容器尺寸监听、卡片高度实测、分页加载与图片尺寸工具。',
+    route: '/components/waterfall',
+    packageName: '@lyt/waterfall',
+    sourceUrl: 'https://github.com/liyangting/tiana-works/tree/main/packages/waterfall',
+    category: '布局与渲染',
+    complexity: '进阶',
+    tags: ['Vue 3', '瀑布流', 'ResizeObserver', '分页加载'],
+    status: '已发布',
+    featured: true,
+    accent: '#c9a374',
+    cover: waterfallCover,
     previews: [],
   },
   {
@@ -62,6 +82,7 @@ export const componentRegistry: ComponentEntry[] = [
     tags: ['Vue 3', '窗口化', 'Recycler', '动态高度'],
     status: '规划中',
     featured: true,
+    accent: '#6d78c8',
     cover: virtualListCover,
     previews: [],
   },
@@ -77,6 +98,7 @@ export const componentRegistry: ComponentEntry[] = [
     tags: ['Vue 3', 'Canvas 2D', '粒子系统', '力场模拟'],
     status: '规划中',
     featured: true,
+    accent: '#4f7f5b',
     cover: particleCanvasCover,
     previews: [],
   },
@@ -92,6 +114,7 @@ export const componentRegistry: ComponentEntry[] = [
     tags: ['Vue 3', 'HTTP', '状态机', '并发控制'],
     status: '规划中',
     featured: true,
+    accent: '#c2764a',
     cover: uploadFlowCover,
     previews: [],
   },
@@ -106,7 +129,6 @@ export const componentRegistry: ComponentEntry[] = [
     complexity: '高阶',
     tags: ['Vue 3', 'Matter.js', '物理模拟', '游戏化'],
     status: '规划中',
-    featured: true,
     cover: physicsBallCover,
     previews: [],
   },

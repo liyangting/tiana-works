@@ -7,7 +7,7 @@
       <header class="pf-page-hero">
         <p class="pf-kicker">Projects</p>
         <h1 class="pf-page-title">项目经验</h1>
-        <p class="pf-page-lead">按业务系统、平台基建和工程效能分组，展开查看背景、职责、方案取舍和结果。</p>
+        <p class="pf-page-lead">按业务系统和平台基建分组，展开查看背景、职责、方案取舍和结果。</p>
         <p class="pf-page-note">{{ total }} 个项目 · 点击标题展开详情</p>
       </header>
 
@@ -45,7 +45,8 @@
                   <span class="pf-acc__meta">
                     <span>{{ project.period }}</span>
                     <span>{{ project.role }}</span>
-                    <span v-if="project.status === '示例'">示例数据</span>
+                    <span class="pf-acc__audience">{{ project.audience }}</span>
+                    <span v-if="project.status === '进行中'">进行中</span>
                   </span>
                   <span class="pf-acc__title">{{ project.name }}</span>
                   <span class="pf-acc__subtitle">{{ project.subtitle }}</span>
@@ -84,6 +85,19 @@
                 <div class="pf-acc__content">
                   <p class="pf-acc__summary">{{ project.summary }}</p>
 
+                  <p v-if="project.links?.length" class="pf-acc__links">
+                    <a
+                      v-for="link in project.links"
+                      :key="link.href"
+                      :href="link.href"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {{ link.label }}
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  </p>
+
                   <section
                     v-for="section in project.sections"
                     :key="section.title"
@@ -95,13 +109,6 @@
                       <li v-for="point in section.points" :key="point">{{ point }}</li>
                     </ul>
                   </section>
-
-                  <p class="pf-acc__note">
-                    <span class="pf-badge is-muted">{{
-                      project.status === '示例' ? '示例占位' : '已上线'
-                    }}</span>
-                    当前文案为结构示例，替换为真实项目内容即可。
-                  </p>
                 </div>
               </div>
             </div>
@@ -258,6 +265,13 @@ function toggle(slug: string) {
   letter-spacing: 0.03em;
 }
 
+.pf-acc__audience {
+  padding: 1px 9px;
+  border: 1px solid var(--pf-line);
+  border-radius: 999px;
+  color: var(--pf-text-soft);
+}
+
 .pf-acc__title {
   font-family: var(--pf-serif);
   font-size: clamp(21px, 2.2vw, 27px);
@@ -363,35 +377,26 @@ function toggle(slug: string) {
   line-height: 1.9;
 }
 
-.pf-acc__note {
+.pf-acc__links {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin: 28px 0 0;
-  color: var(--pf-text-dim);
-  font-size: 11.5px;
+  gap: 6px 18px;
+  margin: 14px 0 0;
+  font-size: 12.5px;
+}
+
+.pf-acc__links a {
+  color: var(--pf-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease;
+}
+
+.pf-acc__links a:hover {
+  border-bottom-color: currentcolor;
 }
 
 /* ---------- 展开内容 ---------- */
-
-.pf-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: var(--pf-accent-soft);
-  color: var(--pf-accent);
-  font-size: 11px;
-  letter-spacing: 0.03em;
-}
-
-.pf-badge.is-muted {
-  background: transparent;
-  border: 1px solid var(--pf-line);
-  color: var(--pf-text-dim);
-}
 
 .pf-project-section {
   position: relative;

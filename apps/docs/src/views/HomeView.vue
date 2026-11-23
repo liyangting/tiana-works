@@ -2,19 +2,6 @@
   <main class="pf-home">
     <svg class="pf-sprite" aria-hidden="true" width="0" height="0">
       <symbol
-        id="pf-icon-juejin"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M4 15.2 12 19.6l8-4.4" />
-        <path d="M4 11.1 12 15.5l8-4.4" />
-        <path d="M12 4.4 4 8.8l8 4.4 8-4.4-8-4.4Z" />
-      </symbol>
-      <symbol
         id="pf-icon-mail"
         viewBox="0 0 24 24"
         fill="none"
@@ -93,6 +80,7 @@
                 role="group"
                 :aria-roledescription="'slide'"
                 :aria-label="`${entry.name} ${entry.label}`"
+                :style="cardAccentStyle(entry)"
                 @click="handleCardClick(index)"
               >
                 <template v-if="cardCover(entry)">
@@ -135,7 +123,9 @@
             class="pf-feature-project"
             :to="{ path: '/projects', hash: `#${project.slug}` }"
           >
-            <span class="pf-feature-project__meta">{{ project.category }} · {{ project.period }}</span>
+            <span class="pf-feature-project__meta"
+              >{{ project.category }} · {{ project.audience }} · {{ project.period }}</span
+            >
             <h3>{{ project.name }}</h3>
             <p>{{ project.summary }}</p>
             <span class="pf-feature-project__more">
@@ -242,14 +232,32 @@
             </span>
             <div class="pf-footer__meta">
               <strong>{{ profile.displayName }} · {{ profile.name }}</strong>
-              <span>用 Vue 3 做复杂交互，也把复杂度收进边界里。</span>
+              <span>把复杂交互做稳，把工程细节做实。</span>
             </div>
           </div>
 
           <div class="pf-footer__links">
             <span class="pf-footer__label">04 / 联系</span>
             <template v-for="link in profile.links" :key="link.label">
-              <a v-if="link.href" :href="link.href" target="_blank" rel="noreferrer" class="pf-footer__link">
+              <button
+                v-if="link.copy"
+                type="button"
+                class="pf-footer__link"
+                title="点击复制邮箱"
+                @click="copyLink(link)"
+              >
+                <svg class="pf-icon" aria-hidden="true">
+                  <use :href="`#pf-icon-${link.icon}`" />
+                </svg>
+                {{ link.label }}
+              </button>
+              <a
+                v-else-if="link.href"
+                :href="link.href"
+                target="_blank"
+                rel="noreferrer"
+                class="pf-footer__link"
+              >
                 <svg class="pf-icon" aria-hidden="true">
                   <use :href="`#pf-icon-${link.icon}`" />
                 </svg>
@@ -275,13 +283,26 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, nextTick, type CSSProperties } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Keyboard } from 'swiper/modules'
 import { componentRegistry, type ComponentEntry } from '../data/component-registry'
 import { featuredProjects } from '../data/project-registry'
-import { aboutBlocks, profile, stackSummary } from '../data/site-data'
+import { ElMessage } from 'element-plus'
+import { aboutBlocks, profile, stackSummary, type ProfileLink } from '../data/site-data'
+import { copyText } from '../utils/clipboard'
 import 'swiper/css'
+
+async function copyLink(link: ProfileLink) {
+  if (!link.copy) return
+
+  const copied = await copyText(link.copy)
+  if (copied) {
+    ElMessage.success({ message: '邮箱已复制', duration: 1600, offset: 72 })
+  } else {
+    ElMessage.error({ message: '复制失败，请手动选择邮箱', offset: 72 })
+  }
+}
 
 /** Swiper 实例（用于点击侧卡时切到中间位）。 */
 let swiperInstance: any = null
@@ -541,7 +562,7 @@ function handleCardClick(index: number) {
 
 /* ---------- 自动轮播 ---------- */
 
-const AUTOPLAY_DELAY = 32000000
+const AUTOPLAY_DELAY = 4500
 let autoTimer: number | null = null
 
 function stopAutoPlay() {
@@ -572,6 +593,11 @@ const year = new Date().getFullYear()
 
 function cardCover(entry: ComponentEntry): string {
   return entry.cover || entry.previews?.[0]?.src || ''
+}
+
+/** 把注册表里的主色注入为卡片级 CSS 变量。 */
+function cardAccentStyle(entry: ComponentEntry): CSSProperties {
+  return (entry.accent ? { '--pf-card-accent': entry.accent } : {}) as CSSProperties
 }
 </script>
 
@@ -862,6 +888,8 @@ html:not(.dark) .pf-swiper::after {
   position: absolute;
   top: 50%;
   left: 50%;
+  /* 卡片主色：由 registry 的 accent 注入，缺省回退站点主色 */
+  --pf-card-accent: var(--pf-accent);
   /* width 由 applyLayout 里写 inline style 控制（用 cardWidth 像素值），
      CSS 里的 width / max-width 是兜底 */
   max-width: var(--pf-carousel-card-w);
@@ -937,13 +965,18 @@ html:not(.dark) .pf-carousel__card {
   outline-offset: 3px;
 }
 
-/* hover 主卡：加深边框 + 强化阴影 */
+/* hover 主卡：主色描边 + 强化阴影 */
 .swiper-slide-active.pf-carousel__card:hover,
 .swiper-slide-active.pf-carousel__card:focus-visible {
-  border-color: var(--pf-accent);
+  border-color: var(--pf-card-accent);
   box-shadow:
     0 56px 110px -26px rgb(0 0 0 / 52%),
     0 14px 32px -8px rgb(0 0 0 / 24%);
+}
+
+/* 中间主卡平时也使用各自主色描边，便于区分卡片 */
+.swiper-slide-active.pf-carousel__card {
+  border-color: color-mix(in srgb, var(--pf-card-accent) 58%, var(--pf-line));
 }
 
 /* hover 侧卡：去灰度 + 轻微提亮 */
@@ -999,7 +1032,7 @@ html:not(.dark) .pf-carousel__placeholder {
     radial-gradient(55% 50% at 30% 72%, rgb(217 160 91 / 12%), transparent 55%), #ffffff;
 }
 
-/* 底部渐变蒙版：从透明渐变到卡片底色，叠加在封面图之上 */
+/* 底部渐变蒙版：从透明渐变到卡片底色，再混入各自主色 */
 .pf-carousel__mask {
   position: absolute;
   right: 0;
@@ -1007,13 +1040,21 @@ html:not(.dark) .pf-carousel__placeholder {
   left: 0;
   z-index: 2;
   padding: 56px 20px 16px;
-  background: linear-gradient(transparent 0%, #f8f2e8 52%, #f8f2e8 100%);
+  background: linear-gradient(
+    transparent 0%,
+    color-mix(in srgb, var(--pf-card-accent) 9%, #f8f2e8) 52%,
+    color-mix(in srgb, var(--pf-card-accent) 13%, #f8f2e8) 100%
+  );
   color: #241a14;
   pointer-events: none;
 }
 
 html:not(.dark) .pf-carousel__mask {
-  background: linear-gradient(transparent 0%, #ffffff 52%, #ffffff 100%);
+  background: linear-gradient(
+    transparent 0%,
+    color-mix(in srgb, var(--pf-card-accent) 7%, #ffffff) 52%,
+    color-mix(in srgb, var(--pf-card-accent) 11%, #ffffff) 100%
+  );
 }
 
 .pf-carousel__mask strong {
@@ -1024,10 +1065,20 @@ html:not(.dark) .pf-carousel__mask {
   letter-spacing: 0.01em;
 }
 
+.pf-carousel__mask strong::before {
+  content: '';
+  display: block;
+  width: 26px;
+  height: 3px;
+  margin-bottom: 9px;
+  border-radius: 2px;
+  background: var(--pf-card-accent);
+}
+
 .pf-carousel__mask em {
   display: block;
   margin-top: 3px;
-  color: rgb(36 26 20 / 62%);
+  color: color-mix(in srgb, var(--pf-card-accent) 58%, #241a14);
   font-style: normal;
   font-size: 13px;
   letter-spacing: 0.02em;
@@ -1314,11 +1365,19 @@ html:not(.dark) .pf-carousel__mask {
   display: inline-flex;
   align-items: center;
   gap: 7px;
+  padding: 0;
+  border: 0;
+  background: none;
   color: var(--pf-text-soft);
+  font-family: inherit;
   font-size: 12px;
   letter-spacing: 0.02em;
   text-decoration: none;
   transition: color 0.2s ease;
+}
+
+button.pf-footer__link {
+  cursor: pointer;
 }
 
 .pf-footer__link:hover {

@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="Upload flow component cover">
+  <defs>
+    <linearGradient id="uf-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbf2e9" />
+      <stop offset="1" stop-color="#f0dece" />
+    </linearGradient>
+    <linearGradient id="uf-accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d08a5e" />
+      <stop offset="1" stop-color="#b4653d" />
+    </linearGradient>
+    <linearGradient id="uf-cream" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffaf3" />
+      <stop offset="1" stop-color="#f2e4d2" />
+    </linearGradient>
+    <linearGradient id="uf-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8c795" />
+      <stop offset="1" stop-color="#c99a5f" />
+    </linearGradient>
+    <filter id="uf-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#6b3d26" flood-opacity="0.16" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#uf-bg)" />
+  <circle cx="1030" cy="120" r="170" fill="#c2764a" opacity="0.08" />
+  <circle cx="140" cy="650" r="190" fill="#c2764a" opacity="0.06" />
+
+  <!-- 背景装饰卡片 -->
+  <rect x="74" y="160" width="196" height="250" rx="20" fill="#fffaf3" opacity="0.8" />
+  <rect x="930" y="150" width="196" height="260" rx="20" fill="#fffaf3" opacity="0.8" />
+  <g fill="#241a14" opacity="0.1">
+    <rect x="98" y="188" width="116" height="12" rx="6" />
+    <rect x="98" y="212" width="146" height="8" rx="4" />
+    <rect x="98" y="230" width="102" height="8" rx="4" />
+    <rect x="954" y="178" width="104" height="12" rx="6" />
+    <rect x="954" y="202" width="140" height="8" rx="4" />
+    <rect x="954" y="220" width="92" height="8" rx="4" />
+  </g>
+  <g fill="#cf4a2b" opacity="0.42">
+    <rect x="98" y="370" width="62" height="18" rx="9" />
+    <rect x="954" y="370" width="54" height="18" rx="9" />
+  </g>
+  <rect x="110" y="442" width="150" height="120" rx="18" fill="#c2764a" opacity="0.13" />
+  <rect x="940" y="452" width="150" height="118" rx="18" fill="url(#uf-gold)" opacity="0.24" />
+
+  <!-- 星光 -->
+  <g fill="url(#uf-gold)">
+    <path d="M 322 208 L 326 220 L 338 224 L 326 228 L 322 240 L 318 228 L 306 224 L 318 220 Z" />
+    <path d="M 866 564 L 869 573 L 878 576 L 869 579 L 866 588 L 863 579 L 854 576 L 863 573 Z" opacity="0.7" />
+  </g>
+
+  <!-- 面板后的悬浮卡片 -->
+  <rect x="306" y="222" width="112" height="150" rx="18" fill="#c2764a" opacity="0.16" />
+  <rect x="792" y="430" width="120" height="148" rx="18" fill="url(#uf-gold)" opacity="0.22" />
+
+  <g filter="url(#uf-shadow)">
+    <rect x="360" y="138" width="480" height="474" rx="28" fill="url(#uf-cream)" />
+
+    <!-- 上传区 -->
+    <rect
+      x="396"
+      y="174"
+      width="408"
+      height="170"
+      rx="20"
+      fill="#c2764a"
+      opacity="0.07"
+    />
+    <rect
+      x="396"
+      y="174"
+      width="408"
+      height="170"
+      rx="20"
+      fill="none"
+      stroke="#c2764a"
+      stroke-width="2"
+      stroke-dasharray="10 8"
+      opacity="0.42"
+    />
+
+    <!-- 上传图标 -->
+    <circle cx="600" cy="232" r="34" fill="url(#uf-accent)" />
+    <path
+      d="M 600 216 L 600 248 M 586 230 L 600 216 L 614 230"
+      fill="none"
+      stroke="#fffaf3"
+      stroke-width="5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <rect x="548" y="286" width="104" height="10" rx="5" fill="#241a14" opacity="0.12" />
+    <rect x="570" y="306" width="60" height="7" rx="3.5" fill="#241a14" opacity="0.07" />
+
+    <!-- 文件行 1：已完成 -->
+    <rect x="404" y="376" width="44" height="44" rx="12" fill="#c2764a" opacity="0.16" />
+    <rect x="418" y="386" width="16" height="22" rx="4" fill="#fffaf3" />
+    <rect x="421" y="392" width="10" height="2" rx="1" fill="#c2764a" opacity="0.7" />
+    <rect x="421" y="398" width="10" height="2" rx="1" fill="#c2764a" opacity="0.45" />
+    <rect x="466" y="384" width="140" height="9" rx="4.5" fill="#241a14" opacity="0.12" />
+    <rect x="466" y="400" width="88" height="6" rx="3" fill="#241a14" opacity="0.07" />
+    <rect x="466" y="420" width="252" height="8" rx="4" fill="#241a14" opacity="0.08" />
+    <rect x="466" y="420" width="252" height="8" rx="4" fill="url(#uf-accent)" />
+    <circle cx="770" cy="398" r="13" fill="url(#uf-accent)" />
+    <path
+      d="M 764 398 L 769 403 L 777 393"
+      fill="none"
+      stroke="#fffaf3"
+      stroke-width="3"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- 文件行 2：上传中 -->
+    <rect x="404" y="442" width="44" height="44" rx="12" fill="#cf4a2b" opacity="0.12" />
+    <rect x="418" y="452" width="16" height="22" rx="4" fill="#cf4a2b" opacity="0.72" />
+    <rect x="466" y="450" width="120" height="9" rx="4.5" fill="#241a14" opacity="0.12" />
+    <rect x="466" y="466" width="72" height="6" rx="3" fill="#241a14" opacity="0.07" />
+    <rect x="466" y="486" width="252" height="8" rx="4" fill="#241a14" opacity="0.08" />
+    <rect x="466" y="486" width="152" height="8" rx="4" fill="#cf4a2b" opacity="0.72" />
+    <circle cx="770" cy="464" r="13" fill="#c2764a" opacity="0.2" />
+    <path
+      d="M 770 456 L 770 466 L 777 470"
+      fill="none"
+      stroke="#c2764a"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- 文件行 3：等待中 -->
+    <rect x="404" y="508" width="44" height="44" rx="12" fill="#241a14" opacity="0.06" />
+    <rect x="418" y="518" width="16" height="22" rx="4" fill="#241a14" opacity="0.16" />
+    <rect x="466" y="516" width="132" height="9" rx="4.5" fill="#241a14" opacity="0.1" />
+    <rect x="466" y="532" width="80" height="6" rx="3" fill="#241a14" opacity="0.06" />
+    <rect x="466" y="552" width="252" height="8" rx="4" fill="#241a14" opacity="0.06" />
+    <circle cx="770" cy="530" r="13" fill="none" stroke="#241a14" stroke-width="2" opacity="0.16" />
+
+    <!-- 底部状态线 -->
+    <rect x="404" y="582" width="392" height="6" rx="3" fill="#241a14" opacity="0.06" />
+    <rect x="404" y="582" width="286" height="6" rx="3" fill="url(#uf-accent)" opacity="0.55" />
+  </g>
+</svg>

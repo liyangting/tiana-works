@@ -2,19 +2,6 @@
   <main class="pf-page pf-about-page">
     <svg class="pf-sprite" aria-hidden="true" width="0" height="0">
       <symbol
-        id="pf-icon-juejin"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.6"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M4 15.2 12 19.6l8-4.4" />
-        <path d="M4 11.1 12 15.5l8-4.4" />
-        <path d="M12 4.4 4 8.8l8 4.4 8-4.4-8-4.4Z" />
-      </symbol>
-      <symbol
         id="pf-icon-mail"
         viewBox="0 0 24 24"
         fill="none"
@@ -123,7 +110,7 @@
                 <strong>{{ item.company }}</strong>
                 <span>{{ item.role }}</span>
               </div>
-              <p>{{ item.desc }}</p>
+              <p v-if="item.desc">{{ item.desc }}</p>
             </div>
           </li>
         </ol>
@@ -145,13 +132,25 @@
         <h2 id="pf-about-contact" class="pf-about-section__title">联系我</h2>
         <p class="pf-page-note">
           项目合作、技术交流都欢迎。{{
-            profile.links.some((link) => !link.href) ? '未填写的联系方式完成后再补。' : ''
+            profile.links.some((link) => !link.href && !link.copy) ? '未填写的联系方式完成后再补。' : ''
           }}
         </p>
 
         <div class="pf-contact-list">
           <template v-for="link in profile.links" :key="link.label">
-            <a v-if="link.href" class="pf-contact" :href="link.href" target="_blank" rel="noreferrer">
+            <button
+              v-if="link.copy"
+              type="button"
+              class="pf-contact"
+              title="点击复制邮箱"
+              @click="copyLink(link)"
+            >
+              <svg aria-hidden="true">
+                <use :href="`#pf-icon-${link.icon}`" />
+              </svg>
+              {{ link.label }}
+            </button>
+            <a v-else-if="link.href" class="pf-contact" :href="link.href" target="_blank" rel="noreferrer">
               <svg aria-hidden="true">
                 <use :href="`#pf-icon-${link.icon}`" />
               </svg>
@@ -178,6 +177,7 @@
 </template>
 
 <script setup lang="ts">
+import { ElMessage } from 'element-plus'
 import {
   aboutBlocks,
   aboutPhases,
@@ -185,7 +185,20 @@ import {
   experienceTimeline,
   profile,
   stackGroups,
+  type ProfileLink,
 } from '../data/site-data'
+import { copyText } from '../utils/clipboard'
+
+async function copyLink(link: ProfileLink) {
+  if (!link.copy) return
+
+  const copied = await copyText(link.copy)
+  if (copied) {
+    ElMessage.success({ message: '邮箱已复制', duration: 1600, offset: 72 })
+  } else {
+    ElMessage.error({ message: '复制失败，请手动选择邮箱', offset: 72 })
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -572,7 +585,9 @@ import {
   padding: 9px 16px;
   border: 1px solid var(--pf-line);
   border-radius: 999px;
+  background: none;
   color: var(--pf-text-soft);
+  font-family: inherit;
   font-size: 12.5px;
   text-decoration: none;
   transition:
@@ -580,7 +595,12 @@ import {
     color 0.25s ease;
 }
 
-a.pf-contact:hover {
+button.pf-contact {
+  cursor: pointer;
+}
+
+a.pf-contact:hover,
+button.pf-contact:hover {
   border-color: var(--pf-accent);
   color: var(--pf-text);
 }

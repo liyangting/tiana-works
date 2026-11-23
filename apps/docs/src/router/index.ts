@@ -11,6 +11,11 @@ const router = createRouter({
       name: 'gacha-lottery',
       component: () => import('../views/GachaLotteryView.vue'),
     },
+    {
+      path: '/components/waterfall',
+      name: 'waterfall',
+      component: () => import('../views/WaterfallView.vue'),
+    },
     { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
