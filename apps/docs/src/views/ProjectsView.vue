@@ -7,7 +7,7 @@
       <header class="pf-page-hero">
         <p class="pf-kicker">Projects</p>
         <h1 class="pf-page-title">项目经验</h1>
-        <p class="pf-page-lead">按业务系统和平台基建分组，展开查看背景、职责、方案取舍和结果。</p>
+        <p class="pf-page-lead">按 C 端业务、B 端业务和个人项目分组，展开查看背景、职责、方案取舍和结果。</p>
         <p class="pf-page-note">{{ total }} 个项目 · 点击标题展开详情</p>
       </header>
 
@@ -45,7 +45,9 @@
                   <span class="pf-acc__meta">
                     <span>{{ project.period }}</span>
                     <span>{{ project.role }}</span>
-                    <span class="pf-acc__audience">{{ project.audience }}</span>
+                    <span v-if="project.category === '个人项目'" class="pf-acc__audience">{{
+                      project.audience
+                    }}</span>
                     <span v-if="project.status === '进行中'">进行中</span>
                   </span>
                   <span class="pf-acc__title">{{ project.name }}</span>
@@ -205,6 +207,12 @@ function toggle(slug: string) {
 .pf-acc__item {
   border-bottom: 1px solid var(--pf-line);
   scroll-margin-top: calc(var(--app-header-h) + 20px);
+  transition: background-color 0.3s ease;
+}
+
+/* 展开项用淡背景托起，和相邻折叠项拉开层次 */
+.pf-acc__item.is-open {
+  background: color-mix(in srgb, var(--pf-surface) 82%, transparent);
 }
 
 .pf-acc__heading {
@@ -230,6 +238,11 @@ function toggle(slug: string) {
 
 .pf-acc__trigger:hover {
   background: var(--pf-surface);
+}
+
+/* 展开项已有淡背景，头部不再叠加悬停底色 */
+.pf-acc__item.is-open .pf-acc__trigger:hover {
+  background: transparent;
 }
 
 .pf-acc__trigger:focus-visible {
@@ -259,6 +272,7 @@ function toggle(slug: string) {
 .pf-acc__meta {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 4px 14px;
   color: var(--pf-text-dim);
   font-size: 11.5px;
@@ -266,10 +280,14 @@ function toggle(slug: string) {
 }
 
 .pf-acc__audience {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 1px 9px;
   border: 1px solid var(--pf-line);
   border-radius: 999px;
   color: var(--pf-text-soft);
+  text-align: center;
 }
 
 .pf-acc__title {
@@ -300,12 +318,16 @@ function toggle(slug: string) {
 }
 
 .pf-acc__tags > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 3px 10px;
   border: 1px solid var(--pf-line);
   border-radius: 999px;
   color: var(--pf-text-dim);
   font-size: 11px;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .pf-acc__metrics {
@@ -366,7 +388,9 @@ function toggle(slug: string) {
 }
 
 .pf-acc__content {
-  padding: 4px 20px clamp(26px, 3vw, 38px) calc(52px + clamp(14px, 2vw, 26px) + 4px);
+  /* 与 trigger 正文列对齐：左右内边距 + 序号列 + 列间距 */
+  padding: 4px 20px clamp(26px, 3vw, 38px)
+    calc(clamp(4px, 1vw, 12px) + 52px + clamp(14px, 2vw, 26px));
 }
 
 .pf-acc__summary {
@@ -481,7 +505,7 @@ function toggle(slug: string) {
   }
 
   .pf-acc__content {
-    padding: 0 4px 26px 46px;
+    padding: 0 4px 26px calc(clamp(4px, 1vw, 12px) + 46px);
   }
 }
 

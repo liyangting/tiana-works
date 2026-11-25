@@ -20,7 +20,7 @@ export interface ProjectEntry {
   slug: string
   name: string
   subtitle: string
-  category: '业务系统' | '平台与基建'
+  category: 'C 端业务' | 'B 端业务' | '个人项目'
   audience: ProjectAudience
   period: string
   role: string
@@ -39,7 +39,7 @@ export const projectRegistry: ProjectEntry[] = [
     slug: 'smart-learning-platform',
     name: '企鹅智慧学练平台',
     subtitle: '多端统一与多模态 AIGC 的 AI 学习产品',
-    category: '业务系统',
+    category: 'C 端业务',
     audience: 'C 端',
     period: '2025.10 — 至今',
     role: '前端开发工程师',
@@ -83,13 +83,66 @@ export const projectRegistry: ProjectEntry[] = [
     links: [{ label: 'ailearning.qq.com', href: 'https://ailearning.qq.com' }],
   },
   {
+    slug: 'home-stock',
+    name: '有物家 / Home-Stock',
+    subtitle: '面向独居、情侣与多成员家庭的共享衣柜 / 冰箱小程序',
+    category: '个人项目',
+    audience: 'C 端',
+    period: '持续',
+    role: '独立开发',
+    summary:
+      '让每件物品都有归处。以家庭为权限边界，统一管理衣柜与冰箱；独立借助 AI 完成产品设计、技术方案与全部实现，交付 8 个页面、5 个 Pinia Store 与 22 个 CloudBase 云函数的 V2.1 版本。',
+    tags: ['uni-app', 'Vue 3', 'TypeScript', 'Pinia', 'CloudBase', '微信小程序'],
+    metrics: [
+      { value: '22 个', label: 'CloudBase 云函数' },
+      { value: '6 张', label: '云数据库集合' },
+      { value: '14 条', label: '架构决策记录' },
+    ],
+    sections: [
+      {
+        title: '背景与目标',
+        body: '家庭物品分散在衣柜、冰箱与储物空间，重复购买、物品遗忘与食材临期浪费较为常见；多数记录工具停留在“个人清单”，缺少家庭成员共享、权限边界与多家庭场景。目标是以记录降低重复购买与遗忘，产品由 V1 本地工具演进至 V2.1 家庭共享。',
+      },
+      {
+        title: '我的职责',
+        points: [
+          '产品设计：定义目标用户、核心场景、V1→V2.1 路线图，以及当前明确不做的范围边界。',
+          '技术方案：设计 User → HomeMember → Home → Space → Item 数据模型与 CloudBase 权限边界。',
+          '前端实现：实现 8 个页面、5 个 Pinia Store、设计系统、分页筛选、空状态与首次使用引导。',
+          'AI 协作：以 5 份核心文档、14 条 ADR、AGENTS.md 与 TASK.md，将需求、约束与验收标准转化为 AI 可执行的输入。',
+        ],
+      },
+      {
+        title: '方案与取舍',
+        points: [
+          '数据归属：Home 是权限边界，Space 不可绕过；查询固定携带 homeId + spaceId，写操作校验 active HomeMember。代价是多一层参数与查询，收益是支持多家庭与多成员共享。',
+          '写入与同步：云函数依据 wxContext.OPENID 识别用户，不采信前端 userId；页面先读本地缓存，登录后后台替换。代价是 22 个函数的部署与同步维护成本，收益是权限集中、首屏更快、弱网可读。',
+          '列表与统计：服务端分页每页 20 条，统计按 homeId + spaceId + 归属 + 分类 + 关键词单独计算，不受分页影响。代价是首屏多次 count/aggregate，收益是列表与统计口径一致。',
+          '图片与兼容：云存储保持“仅创建者可读写”，数据库只存 fileID；getTempFileURLBatch 校验归属后代理临时 URL，上传前压缩至 900px。代价是额外代理调用与缓存过期，收益是安全共享与配额可控。',
+        ],
+      },
+      {
+        title: '结果',
+        points: [
+          '交付 V2.1：8 个页面、5 个 Pinia Store、22 个云函数、6 张集合、5,381 行代码；typecheck 与 build 均通过。',
+          '家庭闭环：登录后自动创建家庭、Owner 与双空间；支持多家庭切换与 6 位邀请码加入。',
+          '衣柜与冰箱：归属导航 + 7 类分类 + 当季，20 条/页；7 天临期模式；吃完支持多份减一与软删。',
+          '图片与工程：只存 fileID，同家庭成员跨用户由云函数代理；src/ 无 any，11 个 Vue 文件全部 script setup lang="ts"。',
+        ],
+      },
+    ],
+    featured: false,
+    status: '进行中',
+    links: [{ label: 'GitHub 仓库', href: 'https://github.com/liyangting/HomeStock' }],
+  },
+  {
     slug: 'bp-banpick-tool',
     name: 'BP 对战 BanPick 工具',
     subtitle: '微信 / QQ 双端可用的移动端赛事工具',
-    category: '业务系统',
+    category: 'C 端业务',
     audience: 'C 端',
     period: '2025.09 — 2025.10',
-    role: '独立开发',
+    role: '前端开发工程师',
     summary:
       '从 0 到 1 独立完成的 H5 工具，覆盖落地页、BP 对战交互和结果海报三大页面，兼容微信与 QQ 内置浏览器。',
     tags: ['Vue 3', 'TypeScript', 'WebSocket', '状态机'],
@@ -132,12 +185,11 @@ export const projectRegistry: ProjectEntry[] = [
     slug: 'high-risk-control',
     name: '高风险管控项目',
     subtitle: 'PC 与移动端三端协同的风险管控系统',
-    category: '业务系统',
+    category: 'B 端业务',
     audience: 'B 端',
     period: '2025.02 — 2025.04',
     role: '前端开发工程师',
-    summary:
-      '面向企业风控场景的三端系统，PC 公司侧、平台侧与移动端并行开发，统一组件与权限指令后复用。',
+    summary: '面向企业风控场景的三端系统，PC 公司侧、平台侧与移动端并行开发，统一组件与权限指令后复用。',
     tags: ['Vue', 'uni-app', 'ECharts', '组件封装'],
     metrics: [
       { value: '3 端', label: '协同开发' },
@@ -173,7 +225,7 @@ export const projectRegistry: ProjectEntry[] = [
     slug: 'enterprise-saas-platform',
     name: '企业数字化 SaaS 平台',
     subtitle: '10+ 生态集成的低代码平台',
-    category: '平台与基建',
+    category: 'B 端业务',
     audience: 'B 端',
     period: '2021.07 — 2025.06',
     role: '核心开发',
@@ -221,12 +273,11 @@ export const projectRegistry: ProjectEntry[] = [
     slug: 'zd-gongchengtong',
     name: '支点工程通 App',
     subtitle: 'WebView 与原生混合的移动端应用',
-    category: '平台与基建',
+    category: 'B 端业务',
     audience: 'B 端',
     period: '2021.07 — 2025.06',
     role: '核心开发',
-    summary:
-      '与 PC 端解耦的混合开发 App，通过 JSBridge 封装相机、GPS、文件系统等 20+ 原生能力。',
+    summary: '与 PC 端解耦的混合开发 App，通过 JSBridge 封装相机、GPS、文件系统等 20+ 原生能力。',
     tags: ['Vue 2', 'Vant', 'JSBridge', '混合开发'],
     metrics: [
       { value: '20+', label: '原生能力' },
@@ -267,12 +318,11 @@ export const projectRegistry: ProjectEntry[] = [
     slug: 'saas-admin-console',
     name: 'SaaS 平台管理端',
     subtitle: 'React 技术栈的平台侧管理后台',
-    category: '业务系统',
+    category: 'B 端业务',
     audience: 'B 端',
     period: '2021.07 — 2023.11',
     role: '前端开发工程师',
-    summary:
-      '平台侧管理后台，用 React + Redux + AntDesign 承载权限、系统配置和模板中心。',
+    summary: '平台侧管理后台，用 React + Redux + AntDesign 承载权限、系统配置和模板中心。',
     tags: ['React', 'Redux', 'AntDesign', 'Hooks'],
     metrics: [
       { value: '20+', label: '原生组件' },
@@ -299,7 +349,10 @@ export const projectRegistry: ProjectEntry[] = [
       },
       {
         title: '结果',
-        points: ['公司管理、模板中心、系统配置三个模块独立交付。', '表单提交增加防抖节流，重复请求明显减少。'],
+        points: [
+          '公司管理、模板中心、系统配置三个模块独立交付。',
+          '表单提交增加防抖节流，重复请求明显减少。',
+        ],
       },
     ],
     status: '已上线',
@@ -308,7 +361,7 @@ export const projectRegistry: ProjectEntry[] = [
     slug: 'component-assets',
     name: '可复用高交互组件资产',
     subtitle: '把复杂交互沉淀成可独立交付的组件包',
-    category: '平台与基建',
+    category: '个人项目',
     audience: '通用',
     period: '持续',
     role: '独立开发',
@@ -351,7 +404,7 @@ export const projectRegistry: ProjectEntry[] = [
   },
 ]
 
-export const projectCategories = ['业务系统', '平台与基建'] as const
+export const projectCategories = ['C 端业务', 'B 端业务', '个人项目'] as const
 
 export function findProject(slug: string): ProjectEntry | undefined {
   return projectRegistry.find((project) => project.slug === slug)

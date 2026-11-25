@@ -9,7 +9,7 @@
           <span aria-hidden="true">←</span>
           全部组件
         </RouterLink>
-        <h1 class="pf-doc__title">GachaLottery 扭蛋机</h1>
+        <h1 class="pf-doc__title">GachaLottery 抽奖交互</h1>
         <p class="pf-doc__lead">
           一个无业务依赖的扭蛋抽取组件。完整实现物理扭蛋堆叠、摇晃、掉落、开球与结果回收动画；奖池与开奖逻辑均由使用方注入。
         </p>

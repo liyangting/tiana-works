@@ -40,8 +40,8 @@ export interface ComponentEntry {
 export const componentRegistry: ComponentEntry[] = [
   {
     name: 'GachaLottery',
-    label: '扭蛋机',
-    description: '集成物理扭蛋堆叠、摇晃、掉落、开球与结果回收动画的可配置抽奖组件。',
+    label: '抽奖交互',
+    description: '集成物理胶囊堆叠、摇晃、掉落、开球与结果回收动画的可配置抽奖交互组件。',
     route: '/components/gacha-lottery',
     packageName: '@lyt/gacha-lottery',
     sourceUrl: 'https://github.com/liyangting/tiana-works/tree/main/packages/gacha-lottery',
