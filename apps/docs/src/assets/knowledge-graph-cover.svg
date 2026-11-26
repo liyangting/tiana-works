@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img" aria-label="KnowledgeGraph 知识图谱封面">
+  <title>KnowledgeGraph 知识图谱封面</title>
+  <defs>
+    <linearGradient id="kg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f1f9f5" />
+      <stop offset="1" stop-color="#dcece4" />
+    </linearGradient>
+    <linearGradient id="kg-planet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8fff0" />
+      <stop offset="0.42" stop-color="#86e9c8" />
+      <stop offset="0.76" stop-color="#2fae8f" />
+      <stop offset="1" stop-color="#12705d" />
+    </linearGradient>
+    <linearGradient id="kg-card" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.92" />
+      <stop offset="1" stop-color="#eefaf4" stop-opacity="0.78" />
+    </linearGradient>
+    <linearGradient id="kg-active" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e8fbf3" />
+      <stop offset="1" stop-color="#ffffff" />
+    </linearGradient>
+    <filter id="kg-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#1f4a3f" flood-opacity="0.14" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#kg-bg)" />
+  <circle cx="1080" cy="110" r="150" fill="#1f8a74" opacity="0.06" />
+  <circle cx="220" cy="690" r="190" fill="#0d6b5c" opacity="0.05" />
+
+  <!-- 星球与轨道 -->
+  <circle cx="40" cy="392" r="272" fill="url(#kg-planet)" opacity="0.9" />
+  <circle cx="40" cy="392" r="272" fill="none" stroke="#ffffff" stroke-opacity="0.28" stroke-width="1" />
+  <path
+    d="M 250 120 C 400 250, 430 450, 270 590"
+    fill="none"
+    stroke="#6f9a8c"
+    stroke-opacity="0.38"
+    stroke-width="2"
+    stroke-dasharray="5 9"
+  />
+
+  <!-- 知识点节点 -->
+  <g fill="#f2fbf7" stroke="#b7d8cc" stroke-width="1.5">
+    <circle cx="250" cy="120" r="24" />
+    <circle cx="330" cy="232" r="24" />
+    <circle cx="340" cy="478" r="24" />
+    <circle cx="270" cy="590" r="24" />
+  </g>
+  <circle cx="370" cy="352" r="28" fill="#1f8a74" />
+  <circle cx="370" cy="352" r="36" fill="none" stroke="#1f8a74" stroke-opacity="0.32" stroke-width="2" />
+  <g fill="#1f8a74" opacity="0.55">
+    <circle cx="250" cy="120" r="7" />
+    <circle cx="330" cy="232" r="7" />
+    <circle cx="340" cy="478" r="7" />
+    <circle cx="270" cy="590" r="7" />
+  </g>
+  <path d="M 363 352 l 5 5 l 10 -11" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- 知识点卡片 -->
+  <g filter="url(#kg-shadow)">
+    <g opacity="0.62">
+      <rect x="300" y="78" width="410" height="84" rx="18" fill="url(#kg-card)" />
+      <rect x="380" y="188" width="446" height="88" rx="18" fill="url(#kg-card)" />
+      <rect x="390" y="434" width="446" height="88" rx="18" fill="url(#kg-card)" />
+      <rect x="320" y="548" width="410" height="84" rx="18" fill="url(#kg-card)" />
+    </g>
+
+    <rect x="420" y="300" width="486" height="104" rx="20" fill="url(#kg-active)" stroke="#1f8a74" stroke-opacity="0.42" stroke-width="1.5" />
+
+    <!-- 卡片文字占位 -->
+    <g fill="#3a5a50" opacity="0.4">
+      <rect x="328" y="104" width="206" height="12" rx="6" />
+      <rect x="328" y="128" width="146" height="8" rx="4" />
+      <rect x="408" y="214" width="230" height="12" rx="6" />
+      <rect x="408" y="238" width="164" height="8" rx="4" />
+      <rect x="418" y="460" width="230" height="12" rx="6" />
+      <rect x="418" y="484" width="164" height="8" rx="4" />
+      <rect x="348" y="574" width="206" height="12" rx="6" />
+      <rect x="348" y="598" width="146" height="8" rx="4" />
+    </g>
+    <g fill="#123a32">
+      <rect x="448" y="328" width="244" height="14" rx="7" />
+      <rect x="448" y="356" width="174" height="9" rx="4.5" opacity="0.55" />
+    </g>
+
+    <!-- 右侧操作按钮 -->
+    <rect x="742" y="326" width="136" height="52" rx="26" fill="#1f8a74" opacity="0.92" />
+    <rect x="778" y="347" width="64" height="9" rx="4.5" fill="#ffffff" opacity="0.72" />
+    <rect x="642" y="104" width="52" height="26" rx="13" fill="#b7d8cc" opacity="0.4" />
+    <rect x="758" y="216" width="52" height="26" rx="13" fill="#b7d8cc" opacity="0.4" />
+    <rect x="768" y="462" width="52" height="26" rx="13" fill="#b7d8cc" opacity="0.34" />
+    <rect x="662" y="574" width="52" height="26" rx="13" fill="#b7d8cc" opacity="0.34" />
+  </g>
+</svg>

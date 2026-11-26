@@ -1,4 +1,5 @@
 import gachaCover from '../assets/gacha-lottery-cover.svg'
+import knowledgeGraphCover from '../assets/knowledge-graph-cover.svg'
 import waterfallCover from '../assets/waterfall.svg'
 import physicsBallCover from '../assets/physics-ball-cover.svg'
 import particleCanvasCover from '../assets/particle-canvas-cover.svg'
@@ -68,6 +69,22 @@ export const componentRegistry: ComponentEntry[] = [
     featured: true,
     accent: '#c9a374',
     cover: waterfallCover,
+    previews: [],
+  },
+  {
+    name: 'KnowledgeGraph',
+    label: '知识图谱',
+    description: '沿弧形轨道排布知识节点，滚动时按锚点插值平移与缩放，支持高亮联动与操作回调。',
+    route: '/components/knowledge-graph',
+    packageName: '@lyt/knowledge-graph',
+    sourceUrl: 'https://github.com/liyangting/tiana-works/tree/main/packages/knowledge-graph',
+    category: '布局与渲染',
+    complexity: '进阶',
+    tags: ['Vue 3', '弧形轨道', '滚动插值', '高亮联动'],
+    status: '已发布',
+    featured: true,
+    accent: '#1f8a74',
+    cover: knowledgeGraphCover,
     previews: [],
   },
   {

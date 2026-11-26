@@ -16,6 +16,11 @@ const router = createRouter({
       name: 'waterfall',
       component: () => import('../views/WaterfallView.vue'),
     },
+    {
+      path: '/components/knowledge-graph',
+      name: 'knowledge-graph',
+      component: () => import('../views/KnowledgeGraphView.vue'),
+    },
     { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
