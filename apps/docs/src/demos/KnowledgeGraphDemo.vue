@@ -270,6 +270,7 @@ onBeforeUnmount(() => {
   height: 870px;
   background: url('../assets/knowledge-graph-planet-graphite.webp') center / contain no-repeat;
   pointer-events: none;
+  transform: rotate(-18deg);
 }
 
 .knowledge-graph-demo[data-theme='amber'] .knowledge-graph-demo__planet {

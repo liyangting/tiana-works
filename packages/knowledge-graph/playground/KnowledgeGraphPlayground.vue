@@ -44,9 +44,7 @@
     </div>
 
     <div class="playground__bar">
-      <p class="playground__tip">
-        当前高亮：{{ activeTitle }}。点击条目会切换高亮；列表支持滚轮与拖拽滚动。
-      </p>
+      <p class="playground__tip">当前高亮：{{ activeTitle }}。点击条目会切换高亮；列表支持滚轮与拖拽滚动。</p>
       <div class="playground__actions">
         <div class="playground__palettes" role="group" aria-label="主题">
           <button
@@ -273,6 +271,7 @@ onBeforeUnmount(() => {
   height: 870px;
   background: url('./assets/planet-graphite.webp') center / contain no-repeat;
   pointer-events: none;
+  transform: rotate(-18deg);
 }
 
 .playground[data-theme='amber'] .playground__planet {
